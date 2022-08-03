@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;

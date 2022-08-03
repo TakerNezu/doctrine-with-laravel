@@ -2,7 +2,6 @@
 
 namespace TakeruNezu\IntegratingDoctrineWithLaravel;
 
-use App\Console\Commands\Doctrine\Migration\DiffCommand;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -12,10 +11,11 @@ use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\DiffCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\GenerateCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\MigrateCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\VersionCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCacheMetadataCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\InfoCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\MappingDescribeCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ValidateSchemaCommand;
@@ -47,12 +47,12 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
         if (!is_null($unixSocket)) $dbConfig['unix_socket'] = $unixSocket;
 
         $this->app->singleton(EntityManager::class, function() use ($dbConfig) {
-            $config = ORMSetup::createAnnotationMetadataConfiguration([base_path().'/app/Entities'], true, null, null);
+            $config = ORMSetup::createXMLMetadataConfiguration([base_path().'/resources/xml'], true, null, app('cache.psr6'));
             return EntityManager::create($dbConfig, $config);
         });
 
         $this->app->singleton(DependencyFactory::class, function() use ($dbConfig) {
-            $config = ORMSetup::createAnnotationMetadataConfiguration([base_path().'/app/Entities'], true, null, null);
+            $config = ORMSetup::createXMLMetadataConfiguration([base_path().'/resources/xml'], true, null, app('cache.psr6'));
             $em = EntityManager::create($dbConfig, $config);
             
             $connection = DriverManager::getConnection($dbConfig);
@@ -88,6 +88,7 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
                 GenerateCommand::class,
                 MigrateCommand::class,
                 VersionCommand::class,
+                ClearCacheMetadataCommand::class,
                 InfoCommand::class,
                 MappingDescribeCommand::class,
                 ValidateSchemaCommand::class,

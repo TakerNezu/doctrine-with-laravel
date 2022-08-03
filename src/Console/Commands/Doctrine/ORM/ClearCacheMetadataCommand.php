@@ -2,12 +2,13 @@
 
 namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM;
 
-use Doctrine\ORM\Tools\Console\Command\InfoCommand as DoctrineThisCommand;
+use Doctrine\ORM\Tools\Console\Command\ClearCache\MetadataCommand as DoctrineThisCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineCommand;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+use Symfony\Component\Console\Input\InputOption;
 
-class InfoCommand extends DoctrineCommand
+class ClearCacheMetadataCommand extends DoctrineCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -15,16 +16,12 @@ class InfoCommand extends DoctrineCommand
     {
         parent::__construct();
         $this->_command = new DoctrineThisCommand(new SingleManagerProvider($em));
-        
+
         $this
-            ->setName('doctrine:orm:info')
-            ->setDescription('Show basic information about all mapped entities')
-            ->setHelp(<<<EOT
-The <info>%command.name%</info> shows basic information about which
-entities exist and possibly if their mapping information contains errors or
-not.
-EOT
-            );
+            ->setName('doctrine:orm:clear-cache:metadata')
+            ->setDescription('Clear all metadata cache of the various cache drivers')
+            ->addOption('flush', null, InputOption::VALUE_NONE, 'If defined, cache entries will be flushed instead of deleted/invalidated.')
+            ->setHelp('The <info>%command.name%</info> command is meant to clear the metadata cache of associated Entity Manager.');
     }
 
     public function handle()

@@ -3,7 +3,7 @@
 namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration;
 
 use Doctrine\Migrations\Tools\Console\Command\MigrateCommand as DoctrineThisCommand;
-use App\Console\Commands\DoctrineCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineCommand;
 use Doctrine\Migrations\DependencyFactory;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
