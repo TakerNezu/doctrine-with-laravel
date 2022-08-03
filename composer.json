@@ -1,5 +1,5 @@
 {
-    "name": "takeru_nezu/integrating-doctrine-with-laravel",
+    "name": "takeru-nezu/integrating-doctrine-with-laravel",
     "type": "library",
     "require": {
         "php": "^7.2.5|^8.0",
