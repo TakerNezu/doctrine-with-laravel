@@ -1,6 +1,6 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM;
+namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache;
 
 use Doctrine\ORM\Tools\Console\Command\ClearCache\MetadataCommand as DoctrineThisCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineCommand;
@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Symfony\Component\Console\Input\InputOption;
 
-class ClearCacheMetadataCommand extends DoctrineCommand
+class MetadataCommand extends DoctrineCommand
 {
     private DoctrineThisCommand $_command;
 
