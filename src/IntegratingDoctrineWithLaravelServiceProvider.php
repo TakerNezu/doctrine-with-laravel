@@ -15,7 +15,9 @@ use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migratio
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\GenerateCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\MigrateCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\VersionCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCacheMetadataCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\MetadataCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\QueryCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\ResultCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\InfoCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\MappingDescribeCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ValidateSchemaCommand;
@@ -88,7 +90,9 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
                 GenerateCommand::class,
                 MigrateCommand::class,
                 VersionCommand::class,
-                ClearCacheMetadataCommand::class,
+                MetadataCommand::class,
+                QueryCommand::class,
+                ResultCommand::class,
                 InfoCommand::class,
                 MappingDescribeCommand::class,
                 ValidateSchemaCommand::class,

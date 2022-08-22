@@ -5,6 +5,7 @@ namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\OR
 use Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand as DoctrineThisCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineCommand;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Console\Input\InputArgument;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
 class MappingDescribeCommand extends DoctrineCommand
@@ -18,6 +19,7 @@ class MappingDescribeCommand extends DoctrineCommand
 
         $this
             ->setName('doctrine:orm:mapping:describe')
+            ->addArgument('entityName', InputArgument::REQUIRED, 'Full or partial name of entity')
             ->setDescription('Display information about mapped objects')
             ->setHelp(<<<EOT
 The %command.full_name% command describes the metadata for the given full or partial entity class name.
