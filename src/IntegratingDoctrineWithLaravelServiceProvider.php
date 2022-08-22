@@ -44,7 +44,7 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
             'port' => $port,
             'driver' => 'pdo_mysql',
         ];
-        if (!is_null($unixSocket)) $dbConfig['unix_socket'] = $unixSocket;
+        if ($unixSocket !== '') $dbConfig['unix_socket'] = $unixSocket;
 
         $this->app->singleton(EntityManager::class, function() use ($dbConfig) {
             $config = ORMSetup::createXMLMetadataConfiguration([base_path().'/resources/xml'], true, null, app('cache.psr6'));
