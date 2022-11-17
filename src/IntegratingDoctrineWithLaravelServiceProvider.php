@@ -9,6 +9,7 @@ use Doctrine\Migrations\Configuration\Migration\ExistingConfiguration;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMSetup;
 use Illuminate\Support\ServiceProvider;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\DiffCommand;
@@ -24,6 +25,39 @@ use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\Vali
 
 class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
 {
+    /**
+     * @throws ORMException
+     */
+    private function createEntityManager(Array $dbConfig): EntityManager {
+        $metaDataMode = config('doctrine.metadata.mode');
+
+        switch ($metaDataMode) {
+            case 'xml':
+                $entityManagerConfig = ORMSetup::createXMLMetadataConfiguration(
+                    [base_path().'/resources/xml'], true, null, app('cache.psr6')
+                );
+                break;
+            case 'annotation':
+                $entityManagerConfig = ORMSetup::createAnnotationMetadataConfiguration(
+                    [base_path().'/app/Entities'], true, null, app('cache.psr6')
+                );
+                break;
+            case 'attribute':
+                $entityManagerConfig = ORMSetup::createAttributeMetadataConfiguration(
+                    [base_path().'/app/Entities'], true, null, app('cache.psr6')
+                );
+                break;
+            default:
+                // defaultはattribute
+                $entityManagerConfig = ORMSetup::createAttributeMetadataConfiguration(
+                    [base_path().'/app/Entities'], true, null, app('cache.psr6')
+                );
+                break;
+        }
+
+        return EntityManager::create($dbConfig, $entityManagerConfig);
+    }
+
     /**
      * Register any application services.
      * 
@@ -49,17 +83,15 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
         if ($unixSocket !== '') $dbConfig['unix_socket'] = $unixSocket;
 
         $this->app->singleton(EntityManager::class, function() use ($dbConfig) {
-            $config = ORMSetup::createXMLMetadataConfiguration([base_path().'/resources/xml'], true, null, app('cache.psr6'));
-            return EntityManager::create($dbConfig, $config);
+            return $this->createEntityManager($dbConfig);
         });
 
         $this->app->singleton(DependencyFactory::class, function() use ($dbConfig) {
-            $config = ORMSetup::createXMLMetadataConfiguration([base_path().'/resources/xml'], true, null, app('cache.psr6'));
-            $em = EntityManager::create($dbConfig, $config);
+            $em = $this->createEntityManager($dbConfig);
             
-            $connection = DriverManager::getConnection($dbConfig);
+//            $connection = DriverManager::getConnection($dbConfig);
             
-            $configuration = new Configuration($connection);
+            $configuration = new Configuration();
             
             $configuration->addMigrationsDirectory('Database\Migrations', database_path('migrations'));
             $configuration->setAllOrNothing(true);
