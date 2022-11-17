@@ -4,7 +4,7 @@ DoctrineとLaravelをシンプルに連携するためのライブラリ
 
 ## Install
 
-composer install takeru-nezu/integrating-doctrine-with-laravel
+composer require takeru-nezu/integrating-doctrine-with-laravel
 
 ## Setup
 
