@@ -7,7 +7,7 @@
         "doctrine/dbal": "^3.2",
         "doctrine/migrations": "^3.5",
         "doctrine/orm": "^2.11.0",
-        "laravel/framework": "7.* | 8.* | 9.*",
+        "laravel/framework": "8.* | 9.*",
         "symfony/cache": "^5.4",
         "symfony/yaml": "^5.4"
     },
