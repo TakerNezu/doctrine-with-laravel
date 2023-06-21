@@ -7,7 +7,7 @@ use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Doctrine
 use Doctrine\Migrations\DependencyFactory;
 use Symfony\Component\Console\Input\InputOption;
 
-class DiffCommand extends DoctrineBaseCommand
+class DoctrineCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 

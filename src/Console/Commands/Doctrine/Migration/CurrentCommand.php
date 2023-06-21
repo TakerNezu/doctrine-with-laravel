@@ -2,12 +2,12 @@
 
 namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration;
 
-use Doctrine\Migrations\Tools\Console\Command\GenerateCommand as DoctrineThisCommand;
+use Doctrine\Migrations\Tools\Console\Command\CurrentCommand as DoctrineThisCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\Migrations\DependencyFactory;
 use Symfony\Component\Console\Input\InputOption;
 
-class GenerateCommand extends DoctrineBaseCommand
+class CurrentCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -19,14 +19,8 @@ class GenerateCommand extends DoctrineBaseCommand
         $this
             ->setName('doctrine:' . $this->_command->getDefaultName())
             ->setDescription($this->_command->getDescription())
-            ->addOption(
-                'namespace',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'The namespace to use for the migration (must be in the list of configured namespaces)'
-            )
             ->setHelp(<<<EOT
-The <info>%command.name%</info> command generates a blank migration class:
+The <info>%command.name%</info> command generates a migration by comparing your current database to your mapping information:
 
     <info>%command.full_name%</info>
 EOT

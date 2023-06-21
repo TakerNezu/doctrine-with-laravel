@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Doctrine\Migrations\DependencyFactory;
 
-class DoctrineCommand extends Command
+class DoctrineBaseCommand extends Command
 {
     private ?DependencyFactory $dependencyFactory = null;
 

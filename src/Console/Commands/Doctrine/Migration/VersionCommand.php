@@ -3,12 +3,12 @@
 namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration;
 
 use Doctrine\Migrations\Tools\Console\Command\VersionCommand as DoctrineThisCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\Migrations\DependencyFactory;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class VersionCommand extends DoctrineCommand
+class VersionCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 

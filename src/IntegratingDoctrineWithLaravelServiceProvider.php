@@ -60,10 +60,10 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     * 
+     *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $host = config('database.connections.mysql.host');
         $user = config('database.connections.mysql.username');
@@ -88,18 +88,18 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
 
         $this->app->singleton(DependencyFactory::class, function() use ($dbConfig) {
             $em = $this->createEntityManager($dbConfig);
-            
+
 //            $connection = DriverManager::getConnection($dbConfig);
-            
+
             $configuration = new Configuration();
-            
+
             $configuration->addMigrationsDirectory('Database\Migrations', database_path('migrations'));
             $configuration->setAllOrNothing(true);
             $configuration->setCheckDatabasePlatform(false);
-            
+
             $storageConfiguration = new TableMetadataStorageConfiguration();
             $storageConfiguration->setTableName('doctrine_migration_versions');
-            
+
             $configuration->setMetadataStorageConfiguration($storageConfiguration);
 
             return DependencyFactory::fromEntityManager(
@@ -115,7 +115,7 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {    
+    {
         if ($this->app->runningInConsole()) {
             $this->commands([
                 DiffCommand::class,

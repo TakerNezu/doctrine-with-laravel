@@ -3,12 +3,12 @@
 namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration;
 
 use Doctrine\Migrations\Tools\Console\Command\MigrateCommand as DoctrineThisCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\Migrations\DependencyFactory;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class MigrateCommand extends DoctrineCommand
+class MigrateCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 

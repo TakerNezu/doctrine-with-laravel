@@ -3,12 +3,12 @@
 namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM;
 
 use Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand as DoctrineThisCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Symfony\Component\Console\Input\InputOption;
 
-class ValidateSchemaCommand extends DoctrineCommand
+class ValidateSchemaCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
