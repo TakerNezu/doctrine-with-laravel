@@ -18,27 +18,10 @@ class ResultCommand extends DoctrineBaseCommand
         $this->_command = new DoctrineThisCommand(new SingleManagerProvider($em));
 
         $this
-            ->setName('doctrine:orm:clear-cache:result')
-            ->setDescription('Clear all result cache of the various cache drivers')
-            ->addOption('flush', null, InputOption::VALUE_NONE, 'If defined, cache entries will be flushed instead of deleted/invalidated.')
-            ->setHelp(<<<'EOT'
-The <info>%command.name%</info> command is meant to clear the result cache of associated Entity Manager.
-It is possible to invalidate all cache entries at once - called delete -, or flushes the cache provider
-instance completely.
-
-The execution type differ on how you execute the command.
-If you want to invalidate the entries (and not delete from cache instance), this command would do the work:
-
-<info>%command.name%</info>
-
-Alternatively, if you want to flush the cache provider using this command:
-
-<info>%command.name% --flush</info>
-
-Finally, be aware that if <info>--flush</info> option is passed, not all cache providers are able to flush entries,
-because of a limitation of its execution nature.
-EOT
-            );
+            ->setName('doctrine:' . $this->_command->getDefaultName())
+            ->setDescription($this->_command->getDescription())
+            ->setHelp($this->_command->getHelp())
+            ->addOption('flush', null, InputOption::VALUE_NONE, 'If defined, cache entries will be flushed instead of deleted/invalidated.');
     }
 
     public function handle()

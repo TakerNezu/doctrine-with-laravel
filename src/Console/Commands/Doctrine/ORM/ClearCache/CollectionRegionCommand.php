@@ -2,13 +2,14 @@
 
 namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache;
 
-use Doctrine\ORM\Tools\Console\Command\ClearCache\MetadataCommand as DoctrineThisCommand;
+use Doctrine\ORM\Tools\Console\Command\ClearCache\CollectionRegionCommand as DoctrineThisCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Symfony\Component\Console\Input\InputOption;
 
-class MetadataCommand extends DoctrineBaseCommand
+class CollectionRegionCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -21,8 +22,12 @@ class MetadataCommand extends DoctrineBaseCommand
             ->setName('doctrine:' . $this->_command->getDefaultName())
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
+            ->addArgument('owner-class', InputArgument::OPTIONAL, 'The owner entity name.')
+            ->addArgument('association', InputArgument::OPTIONAL, 'The association collection name.')
+            ->addArgument('owner-id', InputArgument::OPTIONAL, 'The owner identifier.')
             ->addOption('em', null, InputOption::VALUE_REQUIRED, 'Name of the entity manager to operate on')
-            ->addOption('flush', null, InputOption::VALUE_NONE, 'If defined, cache entries will be flushed instead of deleted/invalidated.');
+            ->addOption('all', null, InputOption::VALUE_NONE, 'If defined, all entity regions will be deleted/invalidated.')
+            ->addOption('flush', null, InputOption::VALUE_NONE, 'If defined, all cache entries will be flushed.');
     }
 
     public function handle()

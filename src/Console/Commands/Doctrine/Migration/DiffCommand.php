@@ -19,12 +19,8 @@ class DiffCommand extends DoctrineBaseCommand
         $this
             ->setName('doctrine:' . $this->_command->getDefaultName())
             ->setDescription($this->_command->getDescription())
-            ->setHelp(<<<EOT
-The <info>%command.name%</info> command generates a migration by comparing your current database to your mapping information:
-
-    <info>%command.full_name%</info>
-EOT
-            )->addOption(
+            ->setHelp($this->_command->getHelp())
+            ->addOption(
                 'namespace',
                 null,
                 InputOption::VALUE_REQUIRED,

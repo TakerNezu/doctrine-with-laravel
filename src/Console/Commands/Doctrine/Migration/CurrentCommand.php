@@ -5,7 +5,6 @@ namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Mi
 use Doctrine\Migrations\Tools\Console\Command\CurrentCommand as DoctrineThisCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\Migrations\DependencyFactory;
-use Symfony\Component\Console\Input\InputOption;
 
 class CurrentCommand extends DoctrineBaseCommand
 {
@@ -19,12 +18,7 @@ class CurrentCommand extends DoctrineBaseCommand
         $this
             ->setName('doctrine:' . $this->_command->getDefaultName())
             ->setDescription($this->_command->getDescription())
-            ->setHelp(<<<EOT
-The <info>%command.name%</info> command generates a migration by comparing your current database to your mapping information:
-
-    <info>%command.full_name%</info>
-EOT
-            );
+            ->setHelp($this->_command->getHelp());
     }
 
     public function handle()

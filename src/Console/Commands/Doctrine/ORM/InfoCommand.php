@@ -17,14 +17,9 @@ class InfoCommand extends DoctrineBaseCommand
         $this->_command = new DoctrineThisCommand(new SingleManagerProvider($em));
 
         $this
-            ->setName('doctrine:orm:info')
-            ->setDescription('Show basic information about all mapped entities')
-            ->setHelp(<<<EOT
-The <info>%command.name%</info> shows basic information about which
-entities exist and possibly if their mapping information contains errors or
-not.
-EOT
-            );
+            ->setName('doctrine:' . $this->_command->getDefaultName())
+            ->setDescription($this->_command->getDescription())
+            ->setHelp($this->_command->getHelp());
     }
 
     public function handle()
