@@ -12,10 +12,12 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMSetup;
 use Illuminate\Support\ServiceProvider;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\CurrentCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\DiffCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\GenerateCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\MigrateCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\VersionCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\CollectionRegionCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\MetadataCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\QueryCommand;
 use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\ResultCommand;
@@ -118,10 +120,12 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                CurrentCommand::class,
                 DiffCommand::class,
                 GenerateCommand::class,
                 MigrateCommand::class,
                 VersionCommand::class,
+                CollectionRegionCommand::class,
                 MetadataCommand::class,
                 QueryCommand::class,
                 ResultCommand::class,
