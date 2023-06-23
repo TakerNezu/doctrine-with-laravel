@@ -120,7 +120,7 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                CurrentCommand::class,
+//                CurrentCommand::class,
                 DiffCommand::class,
                 GenerateCommand::class,
                 MigrateCommand::class,
