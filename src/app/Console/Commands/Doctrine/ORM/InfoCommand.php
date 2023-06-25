@@ -1,14 +1,13 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM;
+namespace TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM;
 
-use Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand as DoctrineThisCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Console\Command\InfoCommand as DoctrineThisCommand;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use Symfony\Component\Console\Input\InputOption;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class ValidateSchemaCommand extends DoctrineBaseCommand
+class InfoCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -20,9 +19,7 @@ class ValidateSchemaCommand extends DoctrineBaseCommand
         $this
             ->setName('doctrine:' . $this->_command->getName())
             ->setDescription($this->_command->getDescription())
-            ->setHelp($this->_command->getHelp())
-            ->addOption('skip-mapping', null, InputOption::VALUE_NONE, 'Skip the mapping validation check')
-            ->addOption('skip-sync', null, InputOption::VALUE_NONE, 'Skip checking if the mapping is in sync with the database');
+            ->setHelp($this->_command->getHelp());
     }
 
     public function handle()

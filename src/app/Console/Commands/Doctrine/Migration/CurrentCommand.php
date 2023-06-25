@@ -1,10 +1,10 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration;
+namespace TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration;
 
-use Doctrine\Migrations\Tools\Console\Command\CurrentCommand as DoctrineThisCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\Migrations\DependencyFactory;
+use Doctrine\Migrations\Tools\Console\Command\CurrentCommand as DoctrineThisCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
 class CurrentCommand extends DoctrineBaseCommand
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache;
+namespace TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM;
 
-use Doctrine\ORM\Tools\Console\Command\ClearCache\QueryCommand as DoctrineThisCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand as DoctrineThisCommand;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class QueryCommand extends DoctrineBaseCommand
+class MappingDescribeCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -21,7 +21,7 @@ class QueryCommand extends DoctrineBaseCommand
             ->setName('doctrine:' . $this->_command->getName())
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
-            ->addOption('flush', null, InputOption::VALUE_NONE, 'If defined, cache entries will be flushed instead of deleted/invalidated.');
+            ->addArgument('entityName', InputArgument::REQUIRED, 'Full or partial name of entity');
     }
 
     public function handle()

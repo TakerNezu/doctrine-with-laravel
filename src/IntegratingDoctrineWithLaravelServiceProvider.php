@@ -2,7 +2,6 @@
 
 namespace TakeruNezu\IntegratingDoctrineWithLaravel;
 
-use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\Migrations\Configuration\Migration\ExistingConfiguration;
@@ -12,18 +11,17 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMSetup;
 use Illuminate\Support\ServiceProvider;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\CurrentCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\DiffCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\GenerateCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\MigrateCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration\VersionCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\CollectionRegionCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\MetadataCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\QueryCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ClearCache\ResultCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\InfoCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\MappingDescribeCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM\ValidateSchemaCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\DiffCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\GenerateCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\MigrateCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\VersionCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\CollectionRegionCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\MetadataCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\QueryCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\ResultCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\InfoCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\MappingDescribeCommand;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ValidateSchemaCommand;
 
 class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
 {
@@ -32,30 +30,16 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
      */
     private function createEntityManager(Array $dbConfig): EntityManager {
         $metaDataMode = config('doctrine.metadata.mode');
+        $path = config('doctrine.metadata.path');
 
-        switch ($metaDataMode) {
-            case 'xml':
-                $entityManagerConfig = ORMSetup::createXMLMetadataConfiguration(
-                    [base_path().'/resources/xml'], true, null, app('cache.psr6')
-                );
-                break;
-            case 'annotation':
-                $entityManagerConfig = ORMSetup::createAnnotationMetadataConfiguration(
-                    [base_path().'/app/Entities'], true, null, app('cache.psr6')
-                );
-                break;
-            case 'attribute':
-                $entityManagerConfig = ORMSetup::createAttributeMetadataConfiguration(
-                    [base_path().'/app/Entities'], true, null, app('cache.psr6')
-                );
-                break;
-            default:
-                // defaultはattribute
-                $entityManagerConfig = ORMSetup::createAttributeMetadataConfiguration(
-                    [base_path().'/app/Entities'], true, null, app('cache.psr6')
-                );
-                break;
-        }
+        $entityManagerConfig = match ($metaDataMode) {
+            'xml' => ORMSetup::createXMLMetadataConfiguration(
+                [base_path() . '/resources/xml'], true, null, app('cache.psr6')
+            ),
+            default => ORMSetup::createAttributeMetadataConfiguration(
+                [base_path() . '/app/Entities'], true, null, app('cache.psr6')
+            ),
+        };
 
         return EntityManager::create($dbConfig, $entityManagerConfig);
     }
@@ -116,7 +100,7 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -134,5 +118,9 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
                 ValidateSchemaCommand::class,
             ]);
         }
+
+        $this->publishes([
+            __DIR__.'/../config/doctrine.php' => config_path('doctrine.php'),
+        ]);
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\Migration;
+namespace TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration;
 
-use Doctrine\Migrations\Tools\Console\Command\VersionCommand as DoctrineThisCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineBaseCommand;
 use Doctrine\Migrations\DependencyFactory;
+use Doctrine\Migrations\Tools\Console\Command\MigrateCommand as DoctrineThisCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class VersionCommand extends DoctrineBaseCommand
+class MigrateCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -24,38 +24,40 @@ class VersionCommand extends DoctrineBaseCommand
             ->addArgument(
                 'version',
                 InputArgument::OPTIONAL,
-                'The version to add or delete.',
-                null
+                'The version FQCN or alias (first, prev, next, latest) to migrate to.',
+                'latest'
             )
             ->addOption(
-                'add',
-                null,
-                InputOption::VALUE_NONE,
-                'Add the specified version.'
-            )
-            ->addOption(
-                'delete',
-                null,
-                InputOption::VALUE_NONE,
-                'Delete the specified version.'
-            )
-            ->addOption(
-                'all',
-                null,
-                InputOption::VALUE_NONE,
-                'Apply to all the versions.'
-            )
-            ->addOption(
-                'range-from',
+                'write-sql',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'Apply from specified version.'
+                'The path to output the migration SQL file. Defaults to current working directory.',
+                false
             )
             ->addOption(
-                'range-to',
+                'dry-run',
+                null,
+                InputOption::VALUE_NONE,
+                'Execute the migration as a dry run.'
+            )
+            ->addOption(
+                'query-time',
+                null,
+                InputOption::VALUE_NONE,
+                'Time all the queries individually.'
+            )
+            ->addOption(
+                'allow-no-migration',
+                null,
+                InputOption::VALUE_NONE,
+                'Do not throw an exception if no migration is available.'
+            )
+            ->addOption(
+                'all-or-nothing',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'Apply to specified version.'
+                'Wrap the entire migration in a transaction.',
+                'notprovided'
             );
     }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine;
+namespace TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine;
 
+use Doctrine\Migrations\DependencyFactory;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
-use Doctrine\Migrations\DependencyFactory;
 
 class DoctrineBaseCommand extends Command
 {
