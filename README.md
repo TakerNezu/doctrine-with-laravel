@@ -24,4 +24,8 @@ DB情報は config/detabaseを経由して、.envを参照
 
 各コマンドは本家のDoctrineコマンドを忠実に再現しています。
 
+```bash
 php artisan help doctrine
+php artisan vendor:publish --tag=integrating-doctrine-with-laravel
+```
+
