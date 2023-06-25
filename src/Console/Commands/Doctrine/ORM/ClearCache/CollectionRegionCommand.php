@@ -19,7 +19,7 @@ class CollectionRegionCommand extends DoctrineBaseCommand
         $this->_command = new DoctrineThisCommand(new SingleManagerProvider($em));
 
         $this
-            ->setName('doctrine:' . $this->_command->getDefaultName())
+            ->setName('doctrine:' . $this->_command->getName())
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
             ->addArgument('owner-class', InputArgument::OPTIONAL, 'The owner entity name.')

@@ -18,7 +18,7 @@ class QueryCommand extends DoctrineBaseCommand
         $this->_command = new DoctrineThisCommand(new SingleManagerProvider($em));
 
         $this
-            ->setName('doctrine:' . $this->_command->getDefaultName())
+            ->setName('doctrine:' . $this->_command->getName())
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
             ->addOption('flush', null, InputOption::VALUE_NONE, 'If defined, cache entries will be flushed instead of deleted/invalidated.');

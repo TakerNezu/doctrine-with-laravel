@@ -17,7 +17,7 @@ class GenerateCommand extends DoctrineBaseCommand
         $this->_command = new DoctrineThisCommand($dependencyFactory);
 
         $this
-            ->setName('doctrine:' . $this->_command->getDefaultName())
+            ->setName('doctrine:' . $this->_command->getName())
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
             ->addOption(
