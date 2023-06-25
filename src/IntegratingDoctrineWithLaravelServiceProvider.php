@@ -120,7 +120,7 @@ class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/../config/doctrine.php' => config_path('doctrine.php'),
+            __DIR__.'/config/doctrine.php' => config_path('doctrine.php'),
         ], 'integrating-doctrine-with-laravel');
     }
 }
