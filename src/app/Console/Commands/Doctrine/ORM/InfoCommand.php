@@ -1,11 +1,11 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM;
+namespace TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\Command\InfoCommand as DoctrineThisCommand;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
 class InfoCommand extends DoctrineBaseCommand
 {

@@ -6,7 +6,7 @@ use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Tools\Console\Command\CurrentCommand as DoctrineThisCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class CurrentCommand extends DoctrineBaseCommand
+class LatestCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 

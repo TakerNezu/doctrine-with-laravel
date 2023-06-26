@@ -1,12 +1,12 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache;
+namespace TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\Command\ClearCache\MetadataCommand as DoctrineThisCommand;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Symfony\Component\Console\Input\InputOption;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
 class MetadataCommand extends DoctrineBaseCommand
 {

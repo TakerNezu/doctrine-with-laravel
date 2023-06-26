@@ -3,12 +3,12 @@
 namespace TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration;
 
 use Doctrine\Migrations\DependencyFactory;
-use Doctrine\Migrations\Tools\Console\Command\VersionCommand as DoctrineThisCommand;
+use Doctrine\Migrations\Tools\Console\Command\ExecuteCommand as DoctrineThisCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class VersionCommand extends DoctrineBaseCommand
+class ExecuteCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -22,40 +22,41 @@ class VersionCommand extends DoctrineBaseCommand
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
             ->addArgument(
-                'version',
-                InputArgument::OPTIONAL,
-                'The version to add or delete.',
+                'versions',
+                InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+                'The versions to execute.',
                 null
             )
             ->addOption(
-                'add',
-                null,
-                InputOption::VALUE_NONE,
-                'Add the specified version.'
-            )
-            ->addOption(
-                'delete',
-                null,
-                InputOption::VALUE_NONE,
-                'Delete the specified version.'
-            )
-            ->addOption(
-                'all',
-                null,
-                InputOption::VALUE_NONE,
-                'Apply to all the versions.'
-            )
-            ->addOption(
-                'range-from',
+                'write-sql',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'Apply from specified version.'
+                'The path to output the migration SQL file. Defaults to current working directory.',
+                false
             )
             ->addOption(
-                'range-to',
+                'dry-run',
                 null,
-                InputOption::VALUE_OPTIONAL,
-                'Apply to specified version.'
+                InputOption::VALUE_NONE,
+                'Execute the migration as a dry run.'
+            )
+            ->addOption(
+                'up',
+                null,
+                InputOption::VALUE_NONE,
+                'Execute the migration up.'
+            )
+            ->addOption(
+                'down',
+                null,
+                InputOption::VALUE_NONE,
+                'Execute the migration down.'
+            )
+            ->addOption(
+                'query-time',
+                null,
+                InputOption::VALUE_NONE,
+                'Time all the queries individually.'
             );
     }
 

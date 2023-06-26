@@ -1,6 +1,6 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine;
+namespace TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine;
 
 use Doctrine\Migrations\DependencyFactory;
 use Illuminate\Console\Command;

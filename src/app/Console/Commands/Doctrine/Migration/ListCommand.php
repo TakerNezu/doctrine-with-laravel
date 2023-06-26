@@ -3,10 +3,10 @@
 namespace TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration;
 
 use Doctrine\Migrations\DependencyFactory;
-use Doctrine\Migrations\Tools\Console\Command\CurrentCommand as DoctrineThisCommand;
+use Doctrine\Migrations\Tools\Console\Command\ListCommand as DoctrineThisCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class CurrentCommand extends DoctrineBaseCommand
+class ListCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 

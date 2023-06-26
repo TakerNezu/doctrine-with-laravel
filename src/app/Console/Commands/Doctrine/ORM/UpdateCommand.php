@@ -3,12 +3,12 @@
 namespace TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand as DoctrineThisCommand;
+use Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand as DoctrineThisCommand;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Symfony\Component\Console\Input\InputOption;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class ValidateSchemaCommand extends DoctrineBaseCommand
+class UpdateCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -21,8 +21,10 @@ class ValidateSchemaCommand extends DoctrineBaseCommand
             ->setName('doctrine:' . $this->_command->getName())
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
-            ->addOption('skip-mapping', null, InputOption::VALUE_NONE, 'Skip the mapping validation check')
-            ->addOption('skip-sync', null, InputOption::VALUE_NONE, 'Skip checking if the mapping is in sync with the database');
+            ->addOption('em', null, InputOption::VALUE_REQUIRED, 'Name of the entity manager to operate on')
+            ->addOption('complete', null, InputOption::VALUE_NONE, 'If defined, all assets of the database which are not relevant to the current metadata will be dropped.')
+            ->addOption('dump-sql', null, InputOption::VALUE_NONE, 'Dumps the generated SQL statements to the screen (does not execute them).')
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Causes the generated SQL statements to be physically executed against your database.');
     }
 
     public function handle()

@@ -1,5 +1,5 @@
 {
-    "name": "takeru-nezu/integrating-doctrine-with-laravel",
+    "name": "takeru-nezu/doctrine-with-laravel",
     "type": "library",
     "require": {
         "php": "^8.0",
@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "TakeruNezu\\IntegratingDoctrineWithLaravel\\": "src/"
+            "TakeruNezu\\DoctrineWithLaravel\\": "src/"
         }
     },
     "authors": [
@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "TakeruNezu\\IntegratingDoctrineWithLaravel\\IntegratingDoctrineWithLaravelServiceProvider"
+                "TakeruNezu\\DoctrineWithLaravel\\DoctrineWithLaravelServiceProvider"
             ]
         }
     }

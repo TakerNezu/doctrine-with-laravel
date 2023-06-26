@@ -1,6 +1,6 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel;
+namespace TakeruNezu\DoctrineWithLaravel;
 
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -11,19 +11,19 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMSetup;
 use Illuminate\Support\ServiceProvider;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\DiffCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\GenerateCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\MigrateCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\VersionCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\CollectionRegionCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\MetadataCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\QueryCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\ResultCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\InfoCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\MappingDescribeCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ValidateSchemaCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\DiffCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\GenerateCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\MigrateCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\VersionCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\CollectionRegionCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\MetadataCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\QueryCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\ResultCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\InfoCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\MappingDescribeCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ValidateSchemaCommand;
 
-class IntegratingDoctrineWithLaravelServiceProvider extends ServiceProvider
+class DoctrineWithLaravelServiceProvider extends ServiceProvider
 {
     /**
      * @throws ORMException

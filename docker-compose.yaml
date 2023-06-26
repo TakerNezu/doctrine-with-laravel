@@ -1,6 +1,6 @@
 services:
-  integrating-doctrine-with-laravel:
-    container_name: integrating-doctrine-with-laravel
+  doctrine-with-laravel:
+    container_name: doctrine-with-laravel
     build: ./
     ports:
       - '80:80'

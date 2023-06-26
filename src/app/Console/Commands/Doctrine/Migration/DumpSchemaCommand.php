@@ -3,12 +3,12 @@
 namespace TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration;
 
 use Doctrine\Migrations\DependencyFactory;
-use Doctrine\Migrations\Tools\Console\Command\VersionCommand as DoctrineThisCommand;
-use Symfony\Component\Console\Input\InputArgument;
+use Doctrine\Migrations\Tools\Console\Command\DumpSchemaCommand as DoctrineThisCommand;
 use Symfony\Component\Console\Input\InputOption;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class VersionCommand extends DoctrineBaseCommand
+
+class DumpSchemaCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -21,41 +21,30 @@ class VersionCommand extends DoctrineBaseCommand
             ->setName('doctrine:' . $this->_command->getName())
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
-            ->addArgument(
-                'version',
-                InputArgument::OPTIONAL,
-                'The version to add or delete.',
-                null
-            )
             ->addOption(
-                'add',
+                'formatted',
                 null,
                 InputOption::VALUE_NONE,
-                'Add the specified version.'
+                'Format the generated SQL.'
             )
             ->addOption(
-                'delete',
+                'namespace',
                 null,
-                InputOption::VALUE_NONE,
-                'Delete the specified version.'
+                InputOption::VALUE_REQUIRED,
+                'Namespace to use for the generated migrations (defaults to the first namespace definition).'
             )
             ->addOption(
-                'all',
+                'filter-tables',
                 null,
-                InputOption::VALUE_NONE,
-                'Apply to all the versions.'
+                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                'Filter the tables to dump via Regex.'
             )
             ->addOption(
-                'range-from',
+                'line-length',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'Apply from specified version.'
-            )
-            ->addOption(
-                'range-to',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Apply to specified version.'
+                'Max line length of unformatted lines.',
+                '120'
             );
     }
 
