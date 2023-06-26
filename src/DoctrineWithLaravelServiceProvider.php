@@ -11,16 +11,28 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMSetup;
 use Illuminate\Support\ServiceProvider;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\CurrentCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\DiffCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\DumpSchemaCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\ExecuteCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\GenerateCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\LatestCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\ListCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\MigrateCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\RollupCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\StatusCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\SyncMetadataCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\VersionCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\CollectionRegionCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\EntityRegionCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\MetadataCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\QueryCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ClearCache\ResultCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\CreateCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\DropCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\InfoCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\MappingDescribeCommand;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\UpdateCommand;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ValidateSchemaCommand;
 
 class DoctrineWithLaravelServiceProvider extends ServiceProvider
@@ -104,17 +116,29 @@ class DoctrineWithLaravelServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-//                CurrentCommand::class,
+                CurrentCommand::class,
                 DiffCommand::class,
+                DumpSchemaCommand::class,
+                ExecuteCommand::class,
                 GenerateCommand::class,
+                LatestCommand::class,
+                ListCommand::class,
                 MigrateCommand::class,
+                RollupCommand::class,
+                StatusCommand::class,
+                SyncMetadataCommand::class,
+                UpdateCommand::class,
                 VersionCommand::class,
                 CollectionRegionCommand::class,
+                EntityRegionCommand::class,
                 MetadataCommand::class,
                 QueryCommand::class,
                 ResultCommand::class,
+                CreateCommand::class,
+                DropCommand::class,
                 InfoCommand::class,
                 MappingDescribeCommand::class,
+                UpdateCommand::class,
                 ValidateSchemaCommand::class,
             ]);
         }
