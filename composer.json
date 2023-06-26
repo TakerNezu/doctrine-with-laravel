@@ -1,19 +1,17 @@
 {
-    "name": "takeru-nezu/integrating-doctrine-with-laravel",
+    "name": "takeru-nezu/doctrine-with-laravel",
     "type": "library",
     "require": {
-        "php": "^7.2.5|^8.0",
-        "doctrine/annotations": "1.13.2",
+        "php": "^8.0",
         "doctrine/dbal": "^3.2",
-        "doctrine/migrations": "^3.5",
-        "doctrine/orm": "^2.11.0",
-        "laravel/framework": "8.* | 9.*",
-        "symfony/cache": "^5.4",
-        "symfony/yaml": "^5.4"
+        "doctrine/migrations": "^3.6",
+        "doctrine/orm": "^2.15.2",
+        "laravel/framework": "10.*",
+        "symfony/cache": "^6.2"
     },
     "autoload": {
         "psr-4": {
-            "TakeruNezu\\IntegratingDoctrineWithLaravel\\": "src/"
+            "TakeruNezu\\DoctrineWithLaravel\\": "src/"
         }
     },
     "authors": [
@@ -25,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "TakeruNezu\\IntegratingDoctrineWithLaravel\\IntegratingDoctrineWithLaravelServiceProvider"
+                "TakeruNezu\\DoctrineWithLaravel\\DoctrineWithLaravelServiceProvider"
             ]
         }
     }

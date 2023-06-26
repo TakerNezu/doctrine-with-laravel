@@ -1,14 +1,14 @@
 <?php
 
-namespace TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\ORM;
+namespace TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM;
 
-use Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand as DoctrineThisCommand;
-use TakeruNezu\IntegratingDoctrineWithLaravel\Console\Commands\Doctrine\DoctrineCommand;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand as DoctrineThisCommand;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 use Symfony\Component\Console\Input\InputOption;
+use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\DoctrineBaseCommand;
 
-class ValidateSchemaCommand extends DoctrineCommand
+class ValidateSchemaCommand extends DoctrineBaseCommand
 {
     private DoctrineThisCommand $_command;
 
@@ -18,11 +18,11 @@ class ValidateSchemaCommand extends DoctrineCommand
         $this->_command = new DoctrineThisCommand(new SingleManagerProvider($em));
 
         $this
-            ->setName('doctrine:orm:validate-schema')
-            ->setDescription('Validate the mapping files')
+            ->setName('doctrine:' . $this->_command->getName())
+            ->setDescription($this->_command->getDescription())
+            ->setHelp($this->_command->getHelp())
             ->addOption('skip-mapping', null, InputOption::VALUE_NONE, 'Skip the mapping validation check')
-            ->addOption('skip-sync', null, InputOption::VALUE_NONE, 'Skip checking if the mapping is in sync with the database')
-            ->setHelp('Validate that the mapping files are correct and in sync with the database.');
+            ->addOption('skip-sync', null, InputOption::VALUE_NONE, 'Skip checking if the mapping is in sync with the database');
     }
 
     public function handle()

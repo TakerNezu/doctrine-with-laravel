@@ -1,27 +1,21 @@
-# IntegratingDoctrineWithLaravel
+# doctrine-with-laravel
 
-DoctrineとLaravelをシンプルに連携するためのライブラリ
+DoctrineとLaravelをシンプルに連携するためのライブラリ。
 
 ## Install
 
-composer require takeru-nezu/integrating-doctrine-with-laravel
+```bash
+composer require takeru-nezu/doctrine-with-laravel
+```
 
-## Setup
+## Set up
 
-note: 現在は、XMLMetadataにのみ対応
+```bash
+php artisan vendor:publish --tag=integrating-doctrine-with-laravel
+```
 
-resource/xml -> XMLMetadataを配置
-app/Entities -> MetadataとつなげるEntityクラスを配置
-database/migrations -> コマンド結果のマイグレーションファイルが配置される
+## Use
 
-DB情報は config/detabaseを経由して、.envを参照
-
-## Howto
-
-このライブラリのメインの特徴は、コマンドツールをLaravelのスタイルに合わせているところです。
-
-以下の方法で、利用できるコマンドを確認でいます。
-
-各コマンドは本家のDoctrineコマンドを忠実に再現しています。
-
-php artisan help doctrine
+```bash
+php artisan doctrine
+```

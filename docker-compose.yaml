@@ -1,0 +1,10 @@
+services:
+  doctrine-with-laravel:
+    container_name: doctrine-with-laravel
+    build: ./
+    ports:
+      - '80:80'
+      - '5173:5173'
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
