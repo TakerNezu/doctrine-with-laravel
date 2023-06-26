@@ -26,5 +26,6 @@
                 "TakeruNezu\\DoctrineWithLaravel\\DoctrineWithLaravelServiceProvider"
             ]
         }
-    }
+    },
+    "license": "MIT"
 }
