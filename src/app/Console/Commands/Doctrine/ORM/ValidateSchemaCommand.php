@@ -21,11 +21,14 @@ class ValidateSchemaCommand extends DoctrineBaseCommand
             ->setName('doctrine:' . $this->_command->getName())
             ->setDescription($this->_command->getDescription())
             ->setHelp($this->_command->getHelp())
+            ->addOption('em', null, InputOption::VALUE_REQUIRED, 'Name of the entity manager to operate on')
             ->addOption('skip-mapping', null, InputOption::VALUE_NONE, 'Skip the mapping validation check')
-            ->addOption('skip-sync', null, InputOption::VALUE_NONE, 'Skip checking if the mapping is in sync with the database');
+            ->addOption('skip-sync', null, InputOption::VALUE_NONE, 'Skip checking if the mapping is in sync with the database')
+            ->addOption('skip-property-types', null, InputOption::VALUE_NONE, 'Skip checking if property types match the Doctrine types')
+            ->setHelp('Validate that the mapping files are correct and in sync with the database.');
     }
 
-    public function handle()
+    public function handle(): void
     {
         $this->_command->initialize($this->input, $this->output);
         $this->_command->execute($this->input, $this->output);
