@@ -2,13 +2,13 @@
 
 namespace TakeruNezu\DoctrineWithLaravel;
 
+use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\Migrations\Configuration\Migration\ExistingConfiguration;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMSetup;
 use Illuminate\Support\ServiceProvider;
 use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\Migration\CurrentCommand;
@@ -38,7 +38,8 @@ use TakeruNezu\DoctrineWithLaravel\app\Console\Commands\Doctrine\ORM\ValidateSch
 class DoctrineWithLaravelServiceProvider extends ServiceProvider
 {
     /**
-     * @throws ORMException
+     * @param array $dbConfig
+     * @return EntityManager
      */
     private function createEntityManager(Array $dbConfig): EntityManager {
         $metaDataMode = config('doctrine.metadata.mode');
@@ -46,14 +47,16 @@ class DoctrineWithLaravelServiceProvider extends ServiceProvider
 
         $entityManagerConfig = match ($metaDataMode) {
             'xml' => ORMSetup::createXMLMetadataConfiguration(
-                [base_path() . '/resources/xml'], true, null, app('cache.psr6')
+                [base_path() . $path ?? '/resources/xml'], true, null, app('cache.psr6')
             ),
             default => ORMSetup::createAttributeMetadataConfiguration(
-                [base_path() . '/app/Entities'], true, null, app('cache.psr6')
+                [base_path() . $path ?? '/app/Entities'], true, null, app('cache.psr6')
             ),
         };
 
-        return EntityManager::create($dbConfig, $entityManagerConfig);
+        $connection = DriverManager::getConnection($dbConfig, $entityManagerConfig);
+
+        return new EntityManager($connection, $entityManagerConfig);
     }
 
     /**
@@ -86,8 +89,6 @@ class DoctrineWithLaravelServiceProvider extends ServiceProvider
 
         $this->app->singleton(DependencyFactory::class, function() use ($dbConfig) {
             $em = $this->createEntityManager($dbConfig);
-
-//            $connection = DriverManager::getConnection($dbConfig);
 
             $configuration = new Configuration();
 
